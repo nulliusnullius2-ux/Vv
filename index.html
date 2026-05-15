@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCII Elephant</title>
+
+<style>
+
+body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    font-family:monospace;
+    color:#00ff66;
+}
+
+/* TERMINAL */
+
+#terminal{
+    position:absolute;
+    left:20px;
+    top:20px;
+
+    width:38%;
+    height:95%;
+
+    overflow:hidden;
+
+    font-size:14px;
+    line-height:18px;
+
+    white-space:pre-line;
+
+    text-shadow:
+    0 0 5px #00ff66,
+    0 0 15px #00ff66;
+}
+
+/* MATRIX */
+
+#matrix{
+    position:absolute;
+
+    left:40%;
+    top:0;
+
+    width:18%;
+    height:100%;
+
+    overflow:hidden;
+
+    color:#00ff66;
+
+    font-size:10px;
+    line-height:12px;
+
+    white-space:pre-line;
+
+    opacity:0.8;
+
+    text-shadow:
+    0 0 8px #00ff66;
+}
+
+/* SŁOŃ */
+
+#elephant{
+    position:absolute;
+
+    right:3%;
+    bottom:5%;
+
+    font-size:5px;
+    line-height:5px;
+
+    white-space:pre;
+
+    transform:scale(1.8);
+
+    transform-origin:bottom right;
+
+    text-shadow:
+    0 0 10px #00ff66,
+    0 0 25px #00ff66;
+}
+
+/* NAPIS */
+
+.warning{
+    position:absolute;
+
+    top:20px;
+    right:30px;
+
+    color:red;
+
+    font-size:40px;
+    font-weight:bold;
+
+    text-shadow:
+    0 0 15px red,
+    0 0 35px red;
+
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+
+    0%{opacity:1;}
+    50%{opacity:0.3;}
+    100%{opacity:1;}
+}
+
+/* GLITCH */
+
+body{
+    animation:shake 0.15s infinite;
+}
+
+@keyframes shake{
+
+    0%{transform:translate(0px);}
+    25%{transform:translate(1px,-1px);}
+    50%{transform:translate(-1px,1px);}
+    75%{transform:translate(1px,1px);}
+    100%{transform:translate(0px);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="warning">
+ASCII ELEPHANT
+</div>
+
+<div id="terminal"></div>
+
+<div id="matrix"></div>
+
+<div id="elephant"></div>
+
+<script>
+
+/* TERMINAL */
+
+const terminal =
+document.getElementById("terminal");
+
+const logs = [
+
+"ACCESSING DATABASE...",
+"READING CACHE...",
+"VERIFYING SESSION...",
+"SCANNING FILES...",
+"EXPORTING TOKENS...",
+"CONNECTING SERVER...",
+"READING MEMORY...",
+"OPENING STORAGE...",
+"SYNCING MODULE...",
+"DOWNLOADING DATA..."
+];
+
+function addLine(){
+
+const text =
+`[${Math.floor(Math.random()*999999999)}]
+${logs[Math.floor(Math.random()*logs.length)]}
+
+`;
+
+terminal.innerHTML += text;
+
+if(terminal.innerHTML.length > 50000){
+
+terminal.innerHTML = "";
+}
+
+terminal.scrollTop =
+terminal.scrollHeight;
+}
+
+setInterval(addLine,70);
+
+/* MATRIX */
+
+const matrix =
+document.getElementById("matrix");
+
+const code = [
+
+"010101010101",
+"packet.send",
+"device.sync",
+"cache.open",
+"kernel.load",
+"memory.read",
+"decrypting...",
+"upload.live",
+"token.export",
+"remote.access"
+];
+
+function addCode(){
+
+matrix.innerHTML +=
+code[
+Math.floor(Math.random()*code.length)
+] + "\n";
+
+if(matrix.innerHTML.length > 12000){
+
+matrix.innerHTML = "";
+}
+
+matrix.scrollTop =
+matrix.scrollHeight;
+}
+
+setInterval(addCode,30);
+
+/* SŁOŃ */
+
+const frames = [
+
+String.raw`
+               .---.
+            .-/     \-.
+          .#@@@@@@@@@@@#.
+        .#@@@@@@@@@@@@@@@#.
+       .#@@@@@@@@@@@@@@@@@#.
+       #@@@@@@(#)@@@(#)@@@@#
+       #@@@@@@@@@@@@@@@@@@@#
+       .#@@@@@@@@@@@@@@@@@#.
+        .#@@@@/     \@@@@#.
+          #@@|  #%#  |@@#
+          #@@| #%#   |@@#
+         //   #%#    |  \\
+        //  (%%%)        \\
+`,
+
+String.raw`
+               .---.
+            .-/     \-.
+          .#@@@@@@@@@@@#.
+        .#@@@@@@@@@@@@@@@#.
+       .#@@@@@@@@@@@@@@@@@#.
+       #@@@@@@⚫@@@@@@⚫@@@@#
+       #@@@@@@@@@@@@@@@@@@@#
+       .#@@@@@@@@@@@@@@@@@#.
+        .#@@@@/     \@@@@#.
+          #@@|  #%#  |@@#
+          #@@|   #%# |@@#
+         //    \  #%#|  \\
+        //        (%%%)  \\
+`
+];
+
+let frame = 0;
+
+function animate(){
+
+document.getElementById("elephant")
+.textContent = frames[frame];
+
+frame++;
+
+if(frame >= frames.length){
+
+frame = 0;
+}
+}
+
+setInterval(animate,350);
+
+animate();
+
+</script>
+
+</body>
+</html>
